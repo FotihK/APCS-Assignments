@@ -74,28 +74,46 @@ public class Game {
         if(areAllTrue(player2compare)) return 2;
         return 0;
     }
-
-    public static void main(String[] args){
-        Scanner input = new Scanner(System.in);
-        String decision = "";
-        System.out.print("Player 1, your cards are: ");
-        printPlayer(1);
+    
+    public static void playTurn(int player, Scanner input){
+        String decision;
+        System.out.print("Player " + player + ", your cards are: ");
+        printPlayer(player);
         System.out.println("The current card on the discard pile is: " + discard);
         System.out.print("Would you like to swap or draw a new card? swap/draw: ");
         decision = input.next().trim().toLowerCase();
-        if(decision.equalsIgnoreCase("swap")){
+        if(decision.equals("swap")){
             System.out.print("\nWhich card would you like to swap? (Enter the card's value): ");
-            swapCard(1,input.nextInt());
+            swapCard(player,input.nextInt());
             System.out.print("Your cards are now: ");
-            printPlayer(1);
-        } else if(decision.equalsIgnoreCase("draw")){
+            printPlayer(player);
+            System.out.println("\n\n\n");
+        } else {
             draw();
             System.out.println("\nThe drawn card is: " + discard);
-            System.out.print("Would you like to swap or discard the card? swap/draw: ");
+            System.out.print("Would you like to swap or discard the card? swap/discard: ");
             decision = input.next().trim().toLowerCase();
+            if(decision.equals("swap")){
+                System.out.print("\nWhich card would you like to swap? (Enter the card's value): ");
+                swapCard(player,input.nextInt());
+                System.out.print("Your cards are now: ");
+                printPlayer(player);
+                System.out.println("\n\n\n");
+            }
+            else {
+                System.out.println("Okay then!\n\n\n");
+            }
 
         }
-        printPlayer(2);
+    }
+
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        while(gameOver() == 0 && deck.size() > 0){
+            playTurn(1, input);
+            playTurn(2,input);
+        }
+        
 
     }
 }
