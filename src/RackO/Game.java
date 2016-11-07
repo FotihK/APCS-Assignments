@@ -105,6 +105,7 @@ public class Game {
                 swapCard(player, input.nextInt());
                 System.out.print("Your cards are now: ");
                 printPlayer(player);
+                Thread.sleep(2500);
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
             } else {
                 draw();
@@ -116,6 +117,7 @@ public class Game {
                     swapCard(player, input.nextInt());
                     System.out.print("Your cards are now: ");
                     printPlayer(player);
+                    Thread.sleep(2500);
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
                 } else {
                     System.out.println("Okay then!\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -126,10 +128,12 @@ public class Game {
             swapCard(player, input.nextInt());
             System.out.print("Your cards are now: ");
             printPlayer(player);
+            Thread.sleep(2500);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
         }
-        Thread.sleep(2500);
-        System.out.println(player == 1 ? "Player 2's turn!" : "Player 1's turn!");
+        if(gameOver() == 0) System.out.println(player == 1 ? "Player 2's turn!" : "Player 1's turn!");
+        else System.out.println("Player " + gameOver() + " has won! Conglaturations!");
+        
     }
 
     public static void main(String[] args) throws InterruptedException {
